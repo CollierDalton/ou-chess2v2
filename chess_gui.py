@@ -5,6 +5,9 @@
 # Note: The pygame tutorial by Eddie Sharick was used for the GUI engine. The GUI code was altered by Boo Sung Kim to
 # fit in with the rest of the project.
 #
+# Chess:
+# CS 3203
+# Cole Dalton, Matt Kish, Chris Dalton
 import chess_engine
 import pygame as py
 
