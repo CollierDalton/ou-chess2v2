@@ -60,7 +60,7 @@ def draw_pieces(screen, game_state):
     for r in range(DIMENSION):
         for c in range(DIMENSION):
             piece = game_state.get_piece(r, c)
-            if piece is not None and piece != Player.EMPTY:
+            if piece != None and piece != Player.EMPTY:
                 screen.blit(IMAGES[piece.get_player() + "_" + piece.get_name()],
                             py.Rect(c * SQ_SIZE, r * SQ_SIZE, SQ_SIZE, SQ_SIZE))
 
@@ -121,7 +121,7 @@ def main():
 
     ai = ai_engine.chess_ai()
     game_state = chess_engine.game_state()
-    if human_player is 'b':
+    if human_player == 'b':
         ai_move = ai.minimax_black(game_state, 3, -100000, 100000, True, Player.PLAYER_1)
         game_state.move_piece(ai_move[0], ai_move[1], True)
 
@@ -153,15 +153,15 @@ def main():
                             player_clicks = []
                             valid_moves = []
 
-                            if human_player is 'w':
+                            if human_player == 'w':
                                 ai_move = ai.minimax_white(game_state, 3, -100000, 100000, True, Player.PLAYER_2)
                                 game_state.move_piece(ai_move[0], ai_move[1], True)
-                            elif human_player is 'b':
+                            elif human_player == 'b':
                                 ai_move = ai.minimax_black(game_state, 3, -100000, 100000, True, Player.PLAYER_1)
                                 game_state.move_piece(ai_move[0], ai_move[1], True)
                     else:
                         valid_moves = game_state.get_valid_moves((row, col))
-                        if valid_moves is None:
+                        if valid_moves == None:
                             valid_moves = []
             elif e.type == py.KEYDOWN:
                 if e.key == py.K_r:
@@ -191,7 +191,7 @@ def main():
         clock.tick(MAX_FPS)
         py.display.flip()
 
-    # elif human_player is 'w':
+    # elif human_player == 'w':
     #     ai = ai_engine.chess_ai()
     #     game_state = chess_engine.game_state()
     #     valid_moves = []
@@ -226,7 +226,7 @@ def main():
     #                             game_state.move_piece(ai_move[0], ai_move[1], True)
     #                     else:
     #                         valid_moves = game_state.get_valid_moves((row, col))
-    #                         if valid_moves is None:
+    #                         if valid_moves == None:
     #                             valid_moves = []
     #             elif e.type == py.KEYDOWN:
     #                 if e.key == py.K_r:
@@ -255,7 +255,7 @@ def main():
     #         clock.tick(MAX_FPS)
     #         py.display.flip()
     #
-    # elif human_player is 'b':
+    # elif human_player == 'b':
     #     pass
 
 
