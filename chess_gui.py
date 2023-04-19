@@ -12,12 +12,12 @@ import ai_engine
 from enums import Player
 
 """Variables"""
-WIDTH = HEIGHT = 512  # width and height of the chess board
+WIDTH = HEIGHT = 1024  # width and height of the chess board
 DIMENSION = 8  # the dimensions of the chess board
 SQ_SIZE = HEIGHT // DIMENSION  # the size of each of the squares in the board
-MAX_FPS = 15  # FPS for animations
+MAX_FPS = 60  # FPS for animations
 IMAGES = {}  # images for the chess pieces
-colors = [py.Color("white"), py.Color("gray")]
+colors = [py.Color("darkslategray"), py.Color("linen")]
 
 # TODO: AI black has been worked on. Mirror progress for other two modes
 def load_images():
