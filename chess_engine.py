@@ -51,7 +51,7 @@ class game_state:
         white_rook_1 = Rook('r', 0, 0, Player.PLAYER_1)
         white_rook_2 = Rook('r', 0, 8, Player.PLAYER_1)
         white_knight_1 = Knight('n', 0, 1, Player.PLAYER_1)
-        white_knight_2 = Knight('n', 0, 8, Player.PLAYER_1)
+        white_knight_2 = Knight('n', 0, 7, Player.PLAYER_1)
         white_bishop_1 = Bishop('b', 0, 2, Player.PLAYER_1)
         white_bishop_2 = Bishop('b', 0, 6, Player.PLAYER_1)
         white_queen1 = Queen('q', 0, 4, Player.PLAYER_1)
@@ -75,7 +75,7 @@ class game_state:
         black_rook_1 = Rook('r', 8, 0, Player.PLAYER_2)
         black_rook_2 = Rook('r', 8, 8, Player.PLAYER_2)
         black_knight_1 = Knight('n', 8, 1, Player.PLAYER_2)
-        black_knight_2 = Knight('n', 8, 8, Player.PLAYER_2)
+        black_knight_2 = Knight('n', 8, 7, Player.PLAYER_2)
         black_bishop_1 = Bishop('b', 8, 2, Player.PLAYER_2)
         black_bishop_2 = Bishop('b', 8, 6, Player.PLAYER_2)
         black_queen1 = Queen('q', 8, 4, Player.PLAYER_2)
@@ -226,10 +226,8 @@ class game_state:
         all_white_moves = self.get_all_legal_moves(Player.PLAYER_1)
         all_black_moves = self.get_all_legal_moves(Player.PLAYER_2)
         if self._is_check and self.whose_turn() and not all_white_moves:
-            print("white lost")
             return 0
         elif self._is_check and not self.whose_turn() and not all_black_moves:
-            print("black lost")
             return 1
         elif not all_white_moves and not all_black_moves:
             return 2
