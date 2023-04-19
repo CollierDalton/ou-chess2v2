@@ -13,6 +13,17 @@ cd ..
 ```
 (#howto) is a pointer
 <a name="howto"></a> is the function for the pointer
+
+
+put in credits
+https://github.com/boosungkim/python-chess
+
+
+todo
+google signin
+landing page
+play chess button
+winloss page/profile/name in top right or something
 --->
 
 ## Index

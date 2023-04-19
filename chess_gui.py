@@ -183,13 +183,13 @@ def main():
         endgame = game_state.checkmate_stalemate_checker()
         if endgame == 0:
             game_over = True
-            draw_text(screen, "Black wins.")
+            draw_text(screen, " Black wins ")
         elif endgame == 1:
             game_over = True
-            draw_text(screen, "White wins.")
+            draw_text(screen, " White wins ")
         elif endgame == 2:
             game_over = True
-            draw_text(screen, "Stalemate.")
+            draw_text(screen, " Stalemate ")
 
         clock.tick(MAX_FPS)
         py.display.flip()
@@ -262,12 +262,43 @@ def main():
     #     pass
 
 
+# def draw_text(screen, text):
+#     font = py.font.SysFont("gabriola", 32, True, False)
+#     text_object = font.render(text, False, py.Color("darkgreen"))
+#     text_location = py.Rect(0, 0, WIDTH, HEIGHT).move(WIDTH / 2 - text_object.get_width() / 2,
+#                                                       HEIGHT / 2 - text_object.get_height() / 2)
+#     screen.blit(text_object, text_location)
+
 def draw_text(screen, text):
-    font = py.font.SysFont("Helvitca", 32, True, False)
-    text_object = font.render(text, False, py.Color("Black"))
-    text_location = py.Rect(0, 0, WIDTH, HEIGHT).move(WIDTH / 2 - text_object.get_width() / 2,
-                                                      HEIGHT / 2 - text_object.get_height() / 2)
-    screen.blit(text_object, text_location)
+    font = py.font.SysFont("corbel", 42, True, False)
+    text_object = font.render(text, False, py.Color("darkgreen"))
+
+    # Create a background surface with the same dimensions as the text object
+    bg_surface = py.Surface(text_object.get_size())
+
+    # Fill the background surface with a white color
+    bg_surface.fill(py.Color("white"))
+
+    # Blit the text object onto the background surface
+    bg_surface.blit(text_object, (0, 0))
+
+    # Create a new surface with a black border
+    border_width = 3
+    border_surface = py.Surface((bg_surface.get_width() + border_width * 2, bg_surface.get_height() + border_width * 2))
+    border_surface.fill(py.Color("black"))
+    inner_rect = py.Rect(border_width, border_width, bg_surface.get_width(), bg_surface.get_height())
+    py.draw.rect(border_surface, py.Color("white"), inner_rect)
+
+    # Blit the background surface onto the new surface
+    border_surface.blit(bg_surface, (border_width, border_width))
+
+    # Calculate the position of the text and background surfaces
+    border_rect = border_surface.get_rect()
+    text_location = py.Rect(0, 0, WIDTH, HEIGHT).move(WIDTH / 2 - border_rect.width / 2,
+                                                      HEIGHT / 2 - border_rect.height / 2)
+
+    # Blit the new surface onto the screen
+    screen.blit(border_surface, text_location)
 
 
 if __name__ == "__main__":
