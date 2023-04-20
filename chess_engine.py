@@ -385,7 +385,7 @@ class game_state:
                             move.castling_move((8, 8), (8, 4), self)
                             self.move_log.append(move)
 
-                            self.get_piece(0, 8).change_col_number(4)
+                            self.get_piece(0, 9).change_col_number(4)
 
                             # move rook
                             self.board[8][4] = self.board[8][8]
@@ -617,7 +617,7 @@ class game_state:
 
         # right of the king
         _possible_pin = ()
-        while king_location_col + _right < 8 and self.get_piece(king_location_row,
+        while king_location_col + _right < 9 and self.get_piece(king_location_row,
                                                                 king_location_col + _right) is not None:
             if self.is_valid_piece(king_location_row, king_location_col + _right) and \
                     self.get_piece(king_location_row, king_location_col + _right).is_player(player) and \
@@ -648,7 +648,7 @@ class game_state:
 
         # below the king
         _possible_pin = ()
-        while king_location_row + _down < 8 and self.get_piece(king_location_row + _down,
+        while king_location_row + _down < 9 and self.get_piece(king_location_row + _down,
                                                                king_location_col) is not None:
             if self.is_valid_piece(king_location_row + _down, king_location_col) and \
                     self.get_piece(king_location_row + _down, king_location_col).is_player(player) and \
@@ -745,7 +745,7 @@ class game_state:
         _up = 1
         _right = 1
         _possible_pin = ()
-        while king_location_col + _right < 8 and king_location_row - _up >= 0 and \
+        while king_location_col + _right < 9 and king_location_row - _up >= 0 and \
                 self.get_piece(king_location_row - _up, king_location_col + _right) is not None:
             if self.is_valid_piece(king_location_row - _up, king_location_col + _right) and \
                     self.get_piece(king_location_row - _up, king_location_col + _right).is_player(player) and \
@@ -779,7 +779,7 @@ class game_state:
         _down = 1
         _left = 1
         _possible_pin = ()
-        while king_location_col - _left >= 0 and king_location_row + _down < 8 and \
+        while king_location_col - _left >= 0 and king_location_row + _down < 9 and \
                 self.get_piece(king_location_row + _down, king_location_col - _left) is not None:
             if self.is_valid_piece(king_location_row + _down, king_location_col - _left) and \
                     self.get_piece(king_location_row + _down, king_location_col - _left).is_player(player) and \
@@ -813,7 +813,7 @@ class game_state:
         _down = 1
         _right = 1
         _possible_pin = ()
-        while king_location_col + _right < 8 and king_location_row + _down < 8 and \
+        while king_location_col + _right < 9 and king_location_row + _down < 9 and \
                 self.get_piece(king_location_row + _down, king_location_col + _right) is not None:
             if self.is_valid_piece(king_location_row + _down, king_location_col + _right) and \
                     self.get_piece(king_location_row + _down, king_location_col + _right).is_player(player) and \
