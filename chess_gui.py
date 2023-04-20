@@ -15,7 +15,7 @@ import ai_engine
 from enums import Player
 
 """Variables"""
-WIDTH = HEIGHT = 1024  # width and height of the chess board
+WIDTH = HEIGHT = 950  # width and height of the chess board
 DIMENSION = 9  # the dimensions of the chess board
 SQ_SIZE = HEIGHT // DIMENSION  # the size of ea2ch of the squares in the board
 MAX_FPS = 60  # FPS for animations
