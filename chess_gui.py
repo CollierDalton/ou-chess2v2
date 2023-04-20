@@ -15,9 +15,9 @@ import ai_engine
 from enums import Player
 
 """Variables"""
-WIDTH = HEIGHT = 1024  # width and height of the chess board
-DIMENSION = 8  # the dimensions of the chess board
-SQ_SIZE = HEIGHT // DIMENSION  # the size of each of the squares in the board
+WIDTH = HEIGHT = 950  # width and height of the chess board
+DIMENSION = 9  # the dimensions of the chess board
+SQ_SIZE = HEIGHT // DIMENSION  # the size of ea2ch of the squares in the board
 MAX_FPS = 60  # FPS for animations
 IMAGES = {}  # images for the chess pieces
 colors = [py.Color("darkslategray"), py.Color("linen")]
@@ -193,7 +193,7 @@ def main():
 
         clock.tick(MAX_FPS)
         py.display.flip()
-
+        
 def draw_text(screen, text):
     font = py.font.SysFont("corbel", 42, True, False)
     text_object = font.render(text, False, py.Color("darkgreen"))
