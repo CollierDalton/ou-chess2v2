@@ -400,7 +400,7 @@ class game_state:
                 # Add move class here
                 elif moving_piece.get_name() is "p":
                     # Promoting white pawn
-                    if moving_piece.is_player(Player.PLAYER_1) and next_square_row == 8:
+                    if (moving_piece.is_player(Player.PLAYER_1) and next_square_row == 8) or (moving_piece.is_player(Player.PLAYER_2) and next_square_row == 0):
                         # print("promoting white pawn")
                         if is_ai:
                             self.promote_pawn_ai(starting_square, moving_piece, ending_square)
@@ -408,13 +408,13 @@ class game_state:
                             self.promote_pawn(starting_square, moving_piece, ending_square)
                         temp = False
                     # Promoting black pawn
-                    elif moving_piece.is_player(Player.PLAYER_2) and next_square_row == 0:
-                        # print("promoting black pawn")
-                        if is_ai:
-                            self.promote_pawn_ai(starting_square, moving_piece, ending_square)
-                        else:
-                            self.promote_pawn(starting_square, moving_piece, ending_square)
-                        temp = False
+                    # elif moving_piece.is_player(Player.PLAYER_2) and next_square_row == 0:
+                    #     # print("promoting black pawn")
+                    #     if is_ai:
+                    #         self.promote_pawn_ai(starting_square, moving_piece, ending_square)
+                    #     else:
+                    #         self.promote_pawn(starting_square, moving_piece, ending_square)
+                    #     temp = False
                     # Moving pawn forward by two
                     # Problem with Pawn en passant ai
                     elif abs(next_square_row - current_square_row) == 2 and current_square_col == next_square_col:
@@ -489,20 +489,20 @@ class game_state:
                     elif undoing_move.rook_starting_square[1] == 8:
                         self.black_king_can_castle[0] = True
                         self.black_king_can_castle[2] = True
-            elif undoing_move.pawn_promoted is True:
-                self.board[undoing_move.starting_square_row][
-                    undoing_move.starting_square_col] = undoing_move.moving_piece
-                self.get_piece(undoing_move.starting_square_row, undoing_move.starting_square_col).change_row_number(
-                    undoing_move.starting_square_row)
-                self.get_piece(undoing_move.starting_square_row, undoing_move.starting_square_col).change_col_number(
-                    undoing_move.starting_square_col)
+            # elif undoing_move.pawn_promoted is True:
+            #     self.board[undoing_move.starting_square_row][
+            #         undoing_move.starting_square_col] = undoing_move.moving_piece
+            #     self.get_piece(undoing_move.starting_square_row, undoing_move.starting_square_col).change_row_number(
+            #         undoing_move.starting_square_row)
+            #     self.get_piece(undoing_move.starting_square_row, undoing_move.starting_square_col).change_col_number(
+            #         undoing_move.starting_square_col)
 
-                self.board[undoing_move.ending_square_row][undoing_move.ending_square_col] = undoing_move.removed_piece
-                if undoing_move.removed_piece != Player.EMPTY:
-                    self.get_piece(undoing_move.ending_square_row, undoing_move.ending_square_col).change_row_number(
-                        undoing_move.ending_square_row)
-                    self.get_piece(undoing_move.ending_square_row, undoing_move.ending_square_col).change_col_number(
-                        undoing_move.ending_square_col)
+            #     self.board[undoing_move.ending_square_row][undoing_move.ending_square_col] = undoing_move.removed_piece
+            #     if undoing_move.removed_piece != Player.EMPTY:
+            #         self.get_piece(undoing_move.ending_square_row, undoing_move.ending_square_col).change_row_number(
+            #             undoing_move.ending_square_row)
+            #         self.get_piece(undoing_move.ending_square_row, undoing_move.ending_square_col).change_col_number(
+            #             undoing_move.ending_square_col)
             elif undoing_move.en_passaned is True:
                 self.board[undoing_move.starting_square_row][
                     undoing_move.starting_square_col] = undoing_move.moving_piece
