@@ -7,19 +7,6 @@
 from Piece import Rook, Knight, Bishop, Queen, King, Pawn
 from enums import Player
 
-'''
-r \ c     0           1           2           3           4           5           6           8 
-0   [(r=0, c=0), (r=0, c=1), (r=0, c=2), (r=0, c=3), (r=0, c=4), (r=0, c=5), (r=0, c=6), (r=0, c=8)]
-1   [(r=1, c=0), (r=1, c=1), (r=1, c=2), (r=1, c=3), (r=1, c=4), (r=1, c=5), (r=1, c=6), (r=1, c=8)]
-2   [(r=2, c=0), (r=2, c=1), (r=2, c=2), (r=2, c=3), (r=2, c=4), (r=2, c=5), (r=2, c=6), (r=2, c=8)]
-3   [(r=3, c=0), (r=3, c=1), (r=3, c=2), (r=3, c=3), (r=3, c=4), (r=3, c=5), (r=3, c=6), (r=3, c=8)]
-4   [(r=4, c=0), (r=4, c=1), (r=4, c=2), (r=4, c=3), (r=4, c=4), (r=4, c=5), (r=4, c=6), (r=4, c=8)]
-5   [(r=5, c=0), (r=5, c=1), (r=5, c=2), (r=5, c=3), (r=5, c=4), (r=5, c=5), (r=5, c=6), (r=5, c=8)]
-6   [(r=6, c=0), (r=6, c=1), (r=6, c=2), (r=6, c=3), (r=6, c=4), (r=6, c=5), (r=6, c=6), (r=6, c=8)]
-8   [(r=8, c=0), (r=8, c=1), (r=8, c=2), (r=8, c=3), (r=8, c=4), (r=8, c=5), (r=8, c=6), (r=8, c=8)]
-'''
-
-
 # TODO: Flip the board according to the player
 # TODO: Pawns are usually indicated by no letters
 # TODO: stalemate
@@ -353,7 +340,7 @@ class game_state:
                             move.castling_move((0, 8), (0, 4), self)
                             self.move_log.append(move)
                             # move rook
-                            self.get_piece(0, 8).change_col_number(4)
+                            self.get_piece(0, 9).change_col_number(4)
 
                             self.board[0][4] = self.board[0][8]
                             self.board[0][8] = Player.EMPTY
