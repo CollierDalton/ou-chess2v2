@@ -66,3 +66,14 @@ else:
     for item in items:
         print(f'{item["name"]} ({item["id"]})')
 
+
+
+# I don't know if this is needed or not, but I am putting in the JSON code I was given after creating the Google Authentication thing:
+
+# {"installed":{"client_id":"1035421752277-67bellh7ccjc5lm4s4l7jcmat1hrocsb.apps.googleusercontent.com","project_id":"ou-2v2chess",
+# "auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token",
+# "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"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","redirect_uris":["http://localhost"]}}
+
+# Definition of JSON:
+# JSON stands for JavaScript Object Notation, and it is a lightweight data-interchange format that is easy for humans to read and write and for machines to parse and generate. 
+# It is commonly used for transmitting data between a server and a web application as an alternative to XML.
