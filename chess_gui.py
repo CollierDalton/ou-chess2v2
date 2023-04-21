@@ -11,7 +11,6 @@
 import chess_engine
 import pygame as py
 import tkinter as tk
-import sys
 
 import ai_engine
 from enums import Player
@@ -124,7 +123,6 @@ def main():
             pwindow.destroy()
 
     def on_closing():
-        pwindow.destroy()
         exit()
         
         

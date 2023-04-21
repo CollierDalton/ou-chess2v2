@@ -34,12 +34,12 @@ class ChessGUI(QMainWindow):
     def on_guest_button_click(self):
         # Open the chess_gui.py file using subprocess
         subprocess.Popen(["python", "chess_gui.py"])
-        # TODO add a close function to close the GUI when chess_gui.py opens
+        self.close()
 
     def on_signin_button_click(self):
         # Open the signin_gui.py file using subprocess
         subprocess.Popen(["python", "signin_gui.py"])
-        # TODO add a close function to close the GUI when signin gui is open
+        self.close()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
