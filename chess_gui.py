@@ -96,11 +96,16 @@ def main():
     pwindow = tk.Tk()
     pwindow.title("Player Selection")
 
-    # Dropdown
+    # Dropdowns
     label = tk.Label(pwindow, text="Number of Players:")
     var = tk.StringVar(pwindow)
     var.set("1") # Default value
     dropdown = tk.OptionMenu(pwindow, var, "1", "2")
+
+    label2 = tk.Label(pwindow, text="Choose your color (Only for 1 player):")
+    var2 = tk.StringVar(pwindow)
+    var2.set("White") # Default value
+    dropdown2 = tk.OptionMenu(pwindow, var2, "White", "Black")
 
     # Submit button
     def submit():
@@ -109,14 +114,13 @@ def main():
         #print(f"Selected {number_of_players} players")
         if int(number_of_players) == 1:
             number_of_players = 1
-            while True:
-                human_player = input("What color do you want to play (w or b)?\n")
-                if human_player == "w" or human_player == "b":
-                    pwindow.destroy()
-                    break
-                else:
-                    print("Enter w or b.\n")
+            if var2.get() == "White":
+                human_player = "w"
+            elif var2.get() == "Black":
+                human_player = "b"
+            pwindow.destroy()
         elif int(number_of_players) == 2:
+            human_player = ''
             pwindow.destroy()
 
     def on_closing():
@@ -130,10 +134,13 @@ def main():
     # Add the label, dropdown, and submit button to the window
     label.pack()
     dropdown.pack()
+    label2.pack()
+    dropdown2.pack()
     submit_button.pack()
 
     # Start the main loop
     pwindow.mainloop()
+
     # while True:
     # try:
     #     number_of_players = input("How many players (1 or 2)?\n")
