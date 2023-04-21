@@ -240,18 +240,18 @@ class game_state:
     def king_can_castle_left(self, player):
         if player is Player.PLAYER_1:
             return self.white_king_can_castle[0] and self.white_king_can_castle[1] and \
-                   self.get_piece(0, 1) is Player.EMPTY and self.get_piece(0, 2) is Player.EMPTY and not self._is_check
+                   self.get_piece(0, 1) is Player.EMPTY and self.get_piece(0, 2) is Player.EMPTY and self.get_piece(0, 3) is Player.EMPTY and not self._is_check
         else:
             return self.black_king_can_castle[0] and self.black_king_can_castle[1] and \
-                   self.get_piece(8, 1) is Player.EMPTY and self.get_piece(8, 2) is Player.EMPTY and not self._is_check
+                   self.get_piece(8, 1) is Player.EMPTY and self.get_piece(8, 2) is Player.EMPTY and self.get_piece(8, 3) is Player.EMPTY and not self._is_check
 
     def king_can_castle_right(self, player):
         if player is Player.PLAYER_1:
             return self.white_king_can_castle[0] and self.white_king_can_castle[2] and \
-                   self.get_piece(0, 6) is Player.EMPTY and self.get_piece(0, 5) is Player.EMPTY and not self._is_check
+                   self.get_piece(0, 7) is Player.EMPTY and self.get_piece(0, 6) is Player.EMPTY and self.get_piece(0, 5) is Player.EMPTY and not self._is_check
         else:
             return self.black_king_can_castle[0] and self.black_king_can_castle[2] and \
-                   self.get_piece(8, 6) is Player.EMPTY and self.get_piece(8, 5) is Player.EMPTY and not self._is_check
+                   self.get_piece(8, 7) is Player.EMPTY and self.get_piece(8, 6) is Player.EMPTY and self.get_piece(8, 5) is Player.EMPTY and not self._is_check
 
     def promote_pawn(self, starting_square, moved_piece, ending_square):
         while True:
@@ -334,15 +334,15 @@ class game_state:
                             self.white_king_can_castle[0] = False
                             self.white_king_can_castle[1] = False
 
-                        elif moved_to_piece == Player.EMPTY and next_square_col == 5 and self.king_can_castle_right(
+                        elif moved_to_piece == Player.EMPTY and next_square_col == 7 and self.king_can_castle_right(
                                 moving_piece.get_player()):
                             move = chess_move(starting_square, ending_square, self, self._is_check)
-                            move.castling_move((0, 8), (0, 4), self)
+                            move.castling_move((0, 8), (0, 6), self)
                             self.move_log.append(move)
                             # move rook
-                            self.get_piece(0, 9).change_col_number(4)
+                            self.get_piece(0, 8).change_col_number(6)
 
-                            self.board[0][4] = self.board[0][8]
+                            self.board[0][6] = self.board[0][8]
                             self.board[0][8] = Player.EMPTY
 
                             self.white_king_can_castle[0] = False
@@ -366,16 +366,16 @@ class game_state:
 
                             self.black_king_can_castle[0] = False
                             self.black_king_can_castle[1] = False
-                        elif moved_to_piece == Player.EMPTY and next_square_col == 5 and self.king_can_castle_right(
+                        elif moved_to_piece == Player.EMPTY and next_square_col == 7 and self.king_can_castle_right(
                                 moving_piece.get_player()):
                             move = chess_move(starting_square, ending_square, self, self._is_check)
-                            move.castling_move((8, 8), (8, 4), self)
+                            move.castling_move((8, 8), (8, 6), self)
                             self.move_log.append(move)
 
-                            self.get_piece(0, 9).change_col_number(4)
+                            self.get_piece(0, 8).change_col_number(6)
 
                             # move rook
-                            self.board[8][4] = self.board[8][8]
+                            self.board[8][6] = self.board[8][8]
                             self.board[8][8] = Player.EMPTY
 
                             self.black_king_can_castle[0] = False

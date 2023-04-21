@@ -98,7 +98,7 @@ def main():
     # Dropdowns
     label = tk.Label(pwindow, text="Number of Players:")
     var = tk.StringVar(pwindow)
-    var.set("1") # Default value
+    var.set("2") # Default value
     dropdown = tk.OptionMenu(pwindow, var, "1", "2")
 
     label2 = tk.Label(pwindow, text="Choose your color (Only for 1 player):")
