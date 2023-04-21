@@ -10,6 +10,8 @@
 # Cole Dalton, Matt Kish, Chris Dalton
 import chess_engine
 import pygame as py
+import tkinter as tk
+import sys
 
 import ai_engine
 from enums import Player
@@ -21,6 +23,7 @@ SQ_SIZE = HEIGHT // DIMENSION  # the size of ea2ch of the squares in the board
 MAX_FPS = 60  # FPS for animations
 IMAGES = {}  # images for the chess pieces
 colors = [py.Color("darkslategray"), py.Color("linen")]
+human_player = ''
 
 # TODO: AI black has been worked on. Mirror progress for other two modes
 def load_images():
@@ -90,26 +93,66 @@ def highlight_square(screen, game_state, valid_moves, square_selected):
 
 def main():
     # Check for the number of players and the color of the AI
-    human_player = ""
-    while True:
-        try:
-            number_of_players = input("How many players (1 or 2)?\n")
-            if int(number_of_players) == 1:
-                number_of_players = 1
-                while True:
-                    human_player = input("What color do you want to play (w or b)?\n")
-                    if human_player == "w" or human_player == "b":
-                        break
-                    else:
-                        print("Enter w or b.\n")
-                break
-            elif int(number_of_players) == 2:
-                number_of_players = 2
-                break
-            else:
-                print("Enter 1 or 2.\n")
-        except ValueError:
-            print("Enter 1 or 2.")
+    pwindow = tk.Tk()
+    pwindow.title("Player Selection")
+
+    # Dropdown
+    label = tk.Label(pwindow, text="Number of Players:")
+    var = tk.StringVar(pwindow)
+    var.set("1") # Default value
+    dropdown = tk.OptionMenu(pwindow, var, "1", "2")
+
+    # Submit button
+    def submit():
+        global human_player
+        number_of_players = var.get()
+        #print(f"Selected {number_of_players} players")
+        if int(number_of_players) == 1:
+            number_of_players = 1
+            while True:
+                human_player = input("What color do you want to play (w or b)?\n")
+                if human_player == "w" or human_player == "b":
+                    pwindow.destroy()
+                    break
+                else:
+                    print("Enter w or b.\n")
+        elif int(number_of_players) == 2:
+            pwindow.destroy()
+
+    def on_closing():
+        pwindow.destroy()
+        exit()
+        
+        
+    submit_button = tk.Button(pwindow, text="Submit", command=submit)
+    pwindow.protocol("WM_DELETE_WINDOW", on_closing)
+
+    # Add the label, dropdown, and submit button to the window
+    label.pack()
+    dropdown.pack()
+    submit_button.pack()
+
+    # Start the main loop
+    pwindow.mainloop()
+    # while True:
+    # try:
+    #     number_of_players = input("How many players (1 or 2)?\n")
+    #     if int(number_of_players) == 1:
+    #         number_of_players = 1
+    #         while True:
+    #             human_player = input("What color do you want to play (w or b)?\n")
+    #             if human_player == "w" or human_player == "b":
+    #                 break
+    #             else:
+    #                 print("Enter w or b.\n")
+    #         break
+    #     elif int(number_of_players) == 2:
+    #         number_of_players = 2
+    #         break
+    #     else:
+    #         print("Enter 1 or 2.\n")
+    # except ValueError:
+    #     print("Enter 1 or 2.")
 
     py.init()
     screen = py.display.set_mode((WIDTH, HEIGHT))
