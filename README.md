@@ -46,10 +46,6 @@ python3 -m pip install -U pygame --user
 ```bash
 pip install PyQt5
 ```
-5. Install numpy
-```bash
-pip install numpy
-```
 If steps 4 and 5 don't work, make sure python is in your environment variables.
 `C:\Users\<YOUR USERNAME>\AppData\Local\Programs\Python\Python311\Scripts`
 
