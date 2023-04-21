@@ -27,8 +27,8 @@ class game_state:
         self.stalemate = False
 
         self._is_check = False
-        self._white_king_location = [0, 3]
-        self._black_king_location = [8, 3]
+        self._white_king_location = [0, 4]
+        self._black_king_location = [8, 4]
 
         self.white_king_can_castle = [True, True,
                                       True]  # Has king not moved, has Rook1(col=0) not moved, has Rook2(col=8) not moved
@@ -556,7 +556,7 @@ class game_state:
      - list valid moves to prevent check but not remove pin
      - if there are no valid moves to prevent check, checkmate
     '''
-
+    #stop here
     def check_for_check(self, king_location, player):
         # self._is_check = False
         _checks = []
@@ -831,9 +831,9 @@ class game_state:
             _down += 1
 
         # knights
-        row_change = [-2, -2, -1, -1, +1, +1, +2, +2]
-        col_change = [-1, +1, -2, +2, -2, +2, +1, -1]
-        for i in range(0, 8):
+        row_change = [-2, -2, -1, -1, 0, +1, +1, +2, +2]
+        col_change = [-1, +1, -2, +2, 0, -2, +2, +1, -1]
+        for i in range(0, 9):
             if self.is_valid_piece(king_location_row + row_change[i], king_location_col + col_change[i]) and \
                     not self.get_piece(king_location_row + row_change[i], king_location_col + col_change[i]).is_player(
                         player):
