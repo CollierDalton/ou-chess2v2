@@ -333,8 +333,7 @@ class game_state:
 
                             self.white_king_can_castle[0] = False
                             self.white_king_can_castle[1] = False
-
-                        elif moved_to_piece == Player.EMPTY and next_square_col == 7 and self.king_can_castle_right(
+                        if moved_to_piece == Player.EMPTY and next_square_col == 7 and self.king_can_castle_right(
                                 moving_piece.get_player()):
                             move = chess_move(starting_square, ending_square, self, self._is_check)
                             move.castling_move((0, 8), (0, 6), self)
@@ -366,13 +365,13 @@ class game_state:
 
                             self.black_king_can_castle[0] = False
                             self.black_king_can_castle[1] = False
-                        elif moved_to_piece == Player.EMPTY and next_square_col == 7 and self.king_can_castle_right(
+                        if moved_to_piece == Player.EMPTY and next_square_col == 7 and self.king_can_castle_right(
                                 moving_piece.get_player()):
                             move = chess_move(starting_square, ending_square, self, self._is_check)
                             move.castling_move((8, 8), (8, 6), self)
                             self.move_log.append(move)
 
-                            self.get_piece(0, 8).change_col_number(6)
+                            self.get_piece(8, 8).change_col_number(6)
 
                             # move rook
                             self.board[8][6] = self.board[8][8]
