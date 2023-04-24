@@ -1,93 +1,105 @@
 import tkinter as tk
-from tkinter import messagebox
-from py_mainform_2 import mainform
-import mysql.connector
+import sqlite3
 
-# connect to mysql database
-connection = mysql.connector.connect(
-     host = 'localhost',
-     user = 'root',
-     password = '',
-     port = '3306',
-     database='py_lg_rg_db'
-)
+# Connect to the database
+conn = sqlite3.connect('users.db')
 
-c = connection.cursor()
+# Create the table to store the username and password
+conn.execute('''CREATE TABLE IF NOT EXISTS users
+             (username TEXT PRIMARY KEY NOT NULL,
+             password TEXT NOT NULL);''')
 
-root = tk.Tk()
+# Create the login window
+def login_window():
+    # Create the login window
+    login_root = tk.Tk()
+    login_root.geometry("300x150")
+    login_root.title("Login")
 
-# close function
-def close_window():
-    root.destroy()
+    # Create the username label and entry field
+    username_label = tk.Label(login_root, text="Username")
+    username_label.pack()
+    username_entry = tk.Entry(login_root)
+    username_entry.pack()
 
-# window dementions
-w = 400
-h = 260
+    # Create the password label and entry field
+    password_label = tk.Label(login_root, text="Password")
+    password_label.pack()
+    password_entry = tk.Entry(login_root, show="*")
+    password_entry.pack()
 
-class loginForm:
-    def __init__(self,master):
-        self.master = master
-        # start center window
-        ws = self.master.winfo_screenwidth()
-        hs = self.master.winfo_screenheight()
-        x = (ws-w)/2
-        y = (hs-h)/2
-        self.master.geometry('%dx%d+%d+%d' % (w, h, x, y))
-        # end center window
+    # Create the login button
+    def login():
+        username = username_entry.get()
+        password = password_entry.get()
 
-        # start create widgets
-        self.frame = tk.Frame(self.master, bg='#fff')
-        
-        self.btnsFrame = tk.Frame(self.frame, bg='#fff', padx=40, pady=15)
-        
-        self.windowTitle = tk.Label(self.frame, text='Login Window', bg='#fff', fg='blue', font=('Tahoma',20), pady=30)
-        
-        self.usernameLabel = tk.Label(self.frame, text='Username:', bg='#fff', font=('Verdana',16))
-        self.usernameTextbox = tk.Entry(self.frame, font=('Verdana',12), width=25, borderwidth='2', relief='ridge')
-        
-        self.passwordLabel = tk.Label(self.frame, text='password:', bg='#fff', font=('Verdana',16))
-        self.passwordTextbox = tk.Entry(self.frame,show='*', font=('Verdana',12), width=25, borderwidth='2', relief='ridge')
-        
-        self.btnLogin = tk.Button(self.btnsFrame, text='Login', bg='green', font=('Verdana',12), fg='#fff', padx=25, pady=10, command=self.login_func)
-        self.btnCancel = tk.Button(self.btnsFrame, text='Cancel', bg='orange', font=('Verdana',12), fg='#fff', padx=25, pady=10, command=close_window)
-        # end create widgets
-
-        # start place widgets
-        self.frame.pack(fill='both')
-        self.windowTitle.grid(row=0, column=0, columnspan=2)
-        self.usernameLabel.grid(row=1, column=0)
-        self.usernameTextbox.grid(row=1, column=1)
-        self.passwordLabel.grid(row=2, column=0, pady=(10,0))
-        self.passwordTextbox.grid(row=2, column=1, pady=(10,0))
-        self.btnsFrame.grid(row=3, column=0, columnspan=2, pady=10)
-        self.btnLogin.grid(row=0, column=0, padx=(0,35))
-        self.btnCancel.grid(row=0, column=1)
-        # end place widgets
-
-    # login function
-    def login_func(self):
-        username = self.usernameTextbox.get()
-        password = self.passwordTextbox.get()
-        select_query = 'SELECT * FROM `users` WHERE `username` = %s and password = %s'
-        vals = (username, password,)
-        c.execute(select_query, vals)
-        #print(c.fetchall())
-        user = c.fetchone()
-        if user is not None:
-            #messagebox.showinfo('Login', 'Yes')
-            mainformwindow = tk.Toplevel()
-            app = mainform(mainformwindow)
-            root.withdraw()
-            mainformwindow.protocol('WM_DELETE_WINDOW', close_window)
+        # Check if the username and password are in the database
+        cursor = conn.execute("SELECT * from users WHERE username = ? AND password = ?", (username, password))
+        if len(cursor.fetchall()) == 1:
+            # User is logged in
+            login_label.config(text="Login successful!")
         else:
-            messagebox.showwarning('Error', 'Enter a Valid Username & password')
+            # User needs to register
+            login_label.config(text="Please register.")
 
+    login_button = tk.Button(login_root, text="Login", command=login)
+    login_button.pack()
 
+    # Create the login label
+    login_label = tk.Label(login_root, text="")
+    login_label.pack()
 
-def main():
-    login_window = loginForm(root)
-    root.mainloop()
+    # Create the register button
+    register_button = tk.Button(login_root, text="Register", command=register_window)
+    register_button.pack()
 
-if __name__ == '__main__':
-    main()
-    
+    # Run the login window
+    login_root.mainloop()
+
+# Create the registration window
+def register_window():
+    # Create the registration window
+    register_root = tk.Tk()
+    register_root.geometry("300x150")
+    register_root.title("Registration")
+
+    # Create the username label and entry field
+    username_label = tk.Label(register_root, text="Username")
+    username_label.pack()
+    username_entry = tk.Entry(register_root)
+    username_entry.pack()
+
+    # Create the password label and entry field
+    password_label = tk.Label(register_root, text="Password")
+    password_label.pack()
+    password_entry = tk.Entry(register_root, show="*")
+    password_entry.pack()
+
+    # Create the register button
+    def register():
+        username = username_entry.get()
+        password = password_entry.get()
+
+        # Insert the username and password into the database
+        try:
+            conn.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
+            conn.commit()
+            register_label.config(text="Registration successful!")
+        except sqlite3.IntegrityError:
+            register_label.config(text="Username already exists.")
+
+    register_button = tk.Button(register_root, text="Register", command=register)
+    register_button.pack()
+
+    # Create the register label
+    register_label = tk.Label(register_root, text="")
+    register_label.pack()
+
+    # Run the registration window
+    register_root.mainloop()
+
+# Run the login window
+login_window()
+
+# Close the connection to the database
+conn.close()
