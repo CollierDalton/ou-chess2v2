@@ -1,1 +1,7 @@
+<<<<<<< Updated upstream
 pygame~=2.0.0.dev8
+=======
+tkinter
+mysql-connector-python
+py_mainform_2
+>>>>>>> Stashed changes
