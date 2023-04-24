@@ -42,6 +42,13 @@ winloss page/profile/name in top right or something
 ```bash 
 python3 -m pip install -U pygame --user
 ```
+4. Install PyQt5
+```bash
+pip install PyQt5
+```
+If steps 4 and 5 don't work, make sure python is in your environment variables.
+`C:\Users\<YOUR USERNAME>\AppData\Local\Programs\Python\Python311\Scripts`
+
 
 <a name="commands"></a>
 ### Commands
