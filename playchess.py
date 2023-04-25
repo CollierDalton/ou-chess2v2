@@ -9,11 +9,11 @@ class ChessGUI(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.label = QLabel("Welcome to chess!")
+        self.label = QLabel("Welcome to OU-Chess2v2!")
         self.label.setFont(QFont("Arial", 20))
         # self.button_guest = QPushButton("Play as Guest")
         # self.button_guest.clicked.connect(self.on_guest_button_click) # Connect the guest button click event to the on_guest_button_click function
-        self.button_signin = QPushButton("Sign in")
+        self.button_signin = QPushButton("Sign in with Google")
         self.button_signin.clicked.connect(self.on_signin_button_click) # Connect the sign in button click event to the on_signin_button_click function
 
         # Set up the main layout
@@ -39,13 +39,12 @@ class ChessGUI(QMainWindow):
 
     def on_signin_button_click(self):
         # Open the signin_gui.py file using subprocess
-<<<<<<< HEAD
-        subprocess.Popen(["python", "signin_gui.py"])
+        #subprocess.Popen(["python", "signin_gui.py"])
         subprocess.Popen(["python", "unit_tests.py"])
-=======
+
         # subprocess.Popen(["python", "signin_gui.py"])
         subprocess.Popen(["python", "google_login.py"])
->>>>>>> testGoogleButton
+
         self.close()
 
 if __name__ == '__main__':
