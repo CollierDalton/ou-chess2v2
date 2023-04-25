@@ -1,6 +1,9 @@
 # 2v2 Chess
 ###### Chris Dalton Cole Dalton and Matt Kish
-Chess with a twist. Teams of two, where each player controls a half of a team (Queen, Bishop, Knight, Rook, and pawns) while each team also has to share their King (and a pawn).
+Chess with a twist. Teams of two, where each player controls a half of a team (Queen, Bishop, Knight, Rook, and pawns) while each team also has to share their King (and a pawn). 
+
+RUN "playchess.py" TO RUN THE PROGRAM
+
 <!---
 Useful tools for README.md:
 *this is italics*
