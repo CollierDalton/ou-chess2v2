@@ -14,10 +14,11 @@ app = Flask(__name__)
 def verify_token():
     # token = request.form['https://oauth2.googleapis.com/token']
     # token = request.args.get('token', '')
-    token = request.args.get('http://127.0.0.1:5000/token')
+    token = request.args.get('http://localhost/?code=4%2F0AVHEtk50jTvEUoHq269SbpibCLNa-5bD9vPWqgBWjDFBqP4gjR4TFypL8yf67GxobIh8Jw&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&prompt=consent')
     user_info = verify_google_token(token)
     if user_info is not None:
         user_id, email = user_info
+        print(f"User ID: {user_id}\nEmail: {email}")
         return f"User ID: {user_id}\nEmail: {email}"
     else:
         return "Invalid token."

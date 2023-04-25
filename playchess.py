@@ -38,7 +38,8 @@ class ChessGUI(QMainWindow):
 
     def on_signin_button_click(self):
         # Open the signin_gui.py file using subprocess
-        subprocess.Popen(["python", "signin_gui.py"])
+        # subprocess.Popen(["python", "signin_gui.py"])
+        subprocess.Popen(["python", "google_login.py"])
         self.close()
 
 if __name__ == '__main__':
