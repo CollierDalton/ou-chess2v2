@@ -297,6 +297,11 @@ class game_state:
 
     # Move a piece
     def move_piece(self, starting_square, ending_square, is_ai):
+        
+
+        
+        
+
         current_square_row = starting_square[0]  # The integer row value of the starting square
         current_square_col = starting_square[1]  # The integer col value of the starting square
         next_square_row = ending_square[0]  # The integer row value of the ending square
@@ -305,8 +310,8 @@ class game_state:
         if self.is_valid_piece(current_square_row, current_square_col) and \
                 (((self.whose_turn() and self.get_piece(current_square_row, current_square_col).is_player(
                     Player.PLAYER_1)) or
-                  (not self.whose_turn() and self.get_piece(current_square_row, current_square_col).is_player(
-                      Player.PLAYER_2)))):
+                (not self.whose_turn() and self.get_piece(current_square_row, current_square_col).is_player(
+                    Player.PLAYER_2)))):
 
             # The chess piece at the starting square
             moving_piece = self.get_piece(current_square_row, current_square_col)
@@ -429,13 +434,13 @@ class game_state:
                         if moving_piece.is_player(Player.PLAYER_1):
                             move = chess_move(starting_square, ending_square, self, self._is_check)
                             move.en_passant_move(self.board[next_square_row - 1][next_square_col],
-                                                 (next_square_row - 1, next_square_col))
+                                                (next_square_row - 1, next_square_col))
                             self.move_log.append(move)
                             self.board[next_square_row - 1][next_square_col] = Player.EMPTY
                         else:
                             move = chess_move(starting_square, ending_square, self, self._is_check)
                             move.en_passant_move(self.board[next_square_row + 1][next_square_col],
-                                                 (next_square_row + 1, next_square_col))
+                                                (next_square_row + 1, next_square_col))
                             self.move_log.append(move)
                             self.board[next_square_row + 1][next_square_col] = Player.EMPTY
                     # moving forward by one or taking a piece
@@ -453,6 +458,15 @@ class game_state:
                     self.board[current_square_row][current_square_col] = Player.EMPTY
 
                 self.white_turn = not self.white_turn
+
+                # if turnCounter < 2:
+                #     self.white_turn = not self.white_turn
+                #     turnCounter += 1
+                # else:
+                #     self.white_turn = True
+                #     turnCounter = 0
+                #     flag = True
+                #     break
 
             else:
                 pass

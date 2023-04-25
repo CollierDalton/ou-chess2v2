@@ -9,6 +9,7 @@
 # CS 3203
 # Cole Dalton, Matt Kish, Chris Dalton
 import chess_engine
+import unit_tests
 import pygame as py
 import tkinter as tk
 
